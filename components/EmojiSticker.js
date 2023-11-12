@@ -1,10 +1,8 @@
 import { StyleSheet, View, Image } from 'react-native';
-import { GestureHandlerRootView, PanGestureHandler, TapGestureHandler } from 'react-native-gesture-handler';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
-  useAnimatedGestureHandler,
   withSpring
 } from 'react-native-reanimated';
 window._frameTimestamp = null //fixes bug in web view where app crashes on emoji selection
@@ -22,25 +20,19 @@ export default function EmojiSticker({ imageSize, stickerSource }) {
   });
   
   const panGesture = Gesture.Pan()
-  .onStart((c) => {
-    console.log("onstart")
-  })
   .onChange((e) => {
     translateX.value += e.changeX;
     translateY.value += e.changeY;
-  })
-  .onEnd(() => 
-  {
   });
 
-
-  const onDoubleTap = useAnimatedGestureHandler({
-    onActive: () => {
-      if (scaleImage.value !== imageSize * 2) {
-        scaleImage.value = scaleImage.value * 2
-      }
+  const tapGesture = Gesture.Tap()
+  .numberOfTaps(2)
+  .onStart(() => {
+    if (scaleImage.value !== imageSize * 2) {
+      scaleImage.value = scaleImage.value * 2
     }
-  });
+  })
+
 
   const containerStyle = useAnimatedStyle(() => {
     return {
@@ -59,13 +51,13 @@ export default function EmojiSticker({ imageSize, stickerSource }) {
   return (
     <GestureDetector gesture={panGesture}>
       <Animated.View style={[containerStyle, { top: -350 }]}>
-        <TapGestureHandler onGestureEvent={onDoubleTap} numberOfTaps={2}>
-          <AnimatedImage
+        <GestureDetector gesture={tapGesture}>
+          <Animated.Image
             source={stickerSource}
             resizeMode="contain"
             style={[imageStyle, { width: imageSize, height: imageSize }]}
           />
-        </TapGestureHandler>
+        </GestureDetector>
       </Animated.View>
     </GestureDetector>
   );
