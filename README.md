@@ -1,7 +1,7 @@
 # React Native Tutorial
 
 ## ✅ source
-https://docs.expo.dev/tutorial/gestures/
+https://docs.expo.dev/tutorial/screenshot/
 
 ## 🚀 How to use
 
