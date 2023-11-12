@@ -1,7 +1,7 @@
 # React Native Tutorial
 
 ## ✅ source
-https://docs.expo.dev/tutorial/screenshot/
+https://docs.expo.dev/tutorial/
 
 ## 🚀 How to use
 
@@ -15,3 +15,4 @@ npx expo install --fix
 ## 📝 Notes
 
 - [`react-native-reanimated` docs](https://docs.swmansion.com/react-native-reanimated/)
+- [`more here`](https://docs.expo.dev/tutorial/follow-up/)
